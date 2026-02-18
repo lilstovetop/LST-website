@@ -16,8 +16,8 @@ const pageTemplate = document.getElementById("pageTemplate");
 const initialChannels = [
   {
     title: "Twitter",
-    subtitle: "twitter.com",
-    theme: "theme-internet",
+    subtitle: "",
+    theme: "theme-twitter",
     url: "https://x.com/lilstovetop",
   },
   { title: "Mii Channel", subtitle: "Nintendo", theme: "theme-mii" },
