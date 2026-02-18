@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wii Menu Replica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Nunito+Sans:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="wii-console" aria-label="Nintendo Wii menu replica">
+      <section class="menu-stage" aria-live="polite">
+        <button class="nav-arrow" id="prevPageButton" type="button" aria-label="Previous page">
+          <span>&lsaquo;</span>
+        </button>
+
+        <div class="viewport" id="menuViewport">
+          <div class="pages" id="pagesTrack"></div>
+        </div>
+
+        <button class="nav-arrow" id="nextPageButton" type="button" aria-label="Next page">
+          <span>&rsaquo;</span>
+        </button>
+      </section>
+
+      <footer class="system-bar">
+        <div class="wave-cut" aria-hidden="true"></div>
+        <div class="system-inner">
+          <div class="system-left">
+            <button class="sys-btn" type="button" aria-label="Wii options">Wii</button>
+            <button class="sys-btn small" type="button" aria-label="SD card">SD</button>
+          </div>
+
+          <div class="center-readout">
+            <div class="page-dots" id="pageDots" aria-label="Page indicators"></div>
+            <p class="menu-name">Wii Menu</p>
+            <p class="date-label" id="dateLabel"></p>
+          </div>
+
+          <div class="system-right">
+            <button class="sys-btn" type="button" aria-label="Message board">Mail</button>
+            <button id="addChannelButton" class="sys-btn" type="button" aria-label="Download channel">+</button>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <template id="pageTemplate">
+      <section class="menu-page" role="group" aria-label="Menu page">
+        <div class="channel-grid"></div>
+      </section>
+    </template>
+
+    <script src="game.js"></script>
+  </body>
+</html>

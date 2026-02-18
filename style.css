@@ -1,0 +1,424 @@
+:root {
+  --bg-top: #f4f8fc;
+  --bg-mid: #edf2f8;
+  --bg-bottom: #dde4ee;
+  --shell-line: #cfd9e5;
+  --tile-line: #c8d2df;
+  --tile-shadow: 0 3px 8px rgba(72, 92, 121, 0.17);
+  --text-main: #425f79;
+  --text-soft: #7b8ea4;
+  --wii-blue: #52b5dd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Nunito Sans", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 14% 4%, rgba(206, 237, 252, 0.62) 0%, transparent 28%),
+    radial-gradient(circle at 90% 8%, rgba(218, 240, 255, 0.72) 0%, transparent 24%),
+    linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 52%, var(--bg-bottom) 100%);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+button {
+  font: inherit;
+}
+
+.wii-console {
+  width: min(980px, 100%);
+  height: min(700px, 94vh);
+  border: 1px solid var(--shell-line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fafdff 0%, #edf3f8 100%);
+  box-shadow: 0 24px 46px rgba(80, 100, 127, 0.25);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr 130px;
+}
+
+.menu-stage {
+  display: grid;
+  grid-template-columns: 32px 1fr 32px;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.72rem 0.2rem 0.35rem;
+  background: linear-gradient(180deg, #fbfdff 0%, #f0f5fa 100%);
+}
+
+.viewport {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.pages {
+  display: flex;
+  transition: transform 320ms cubic-bezier(0.17, 0.77, 0.31, 1);
+}
+
+.menu-page {
+  flex: 0 0 100%;
+  padding: 0.15rem 0.32rem;
+}
+
+.channel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 0.62rem;
+  min-height: min(510px, 68vh);
+}
+
+.channel-tile {
+  border: 1px solid var(--tile-line);
+  border-radius: 11px;
+  background: linear-gradient(180deg, #fbfcfe 0%, #e7edf4 100%);
+  box-shadow: var(--tile-shadow);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 0.35rem;
+  text-align: center;
+}
+
+.channel-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0) 45%);
+  pointer-events: none;
+}
+
+.channel-tile.filled {
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.channel-tile.filled:hover {
+  transform: scale(1.015);
+  box-shadow: 0 9px 16px rgba(87, 114, 148, 0.28);
+}
+
+.channel-tile.launching {
+  animation: launch-pop 180ms ease;
+}
+
+@keyframes launch-pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.tile-content {
+  position: relative;
+  z-index: 1;
+}
+
+.tile-name {
+  margin: 0;
+  font-family: "M PLUS Rounded 1c", "Nunito Sans", sans-serif;
+  font-size: clamp(0.76rem, 1.7vw, 1.02rem);
+  line-height: 1.2;
+  color: #305a7a;
+}
+
+.tile-sub {
+  margin: 0.24rem 0 0;
+  font-size: 0.64rem;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: #60809d;
+}
+
+.channel-tile.empty {
+  background: linear-gradient(180deg, #fefefe 0%, #eef2f7 100%);
+}
+
+.channel-tile.empty .tile-name,
+.channel-tile.empty .tile-sub {
+  opacity: 0;
+}
+
+.theme-disc {
+  background:
+    repeating-linear-gradient(135deg, #f7f9fb 0 7px, #e7edf3 7px 14px),
+    radial-gradient(circle at 75% 24%, rgba(124, 161, 188, 0.24) 0%, transparent 45%);
+}
+
+.theme-mii {
+  background:
+    radial-gradient(circle at 24% 30%, rgba(146, 173, 183, 0.2) 0 15%, transparent 17%),
+    radial-gradient(circle at 66% 62%, rgba(146, 173, 183, 0.19) 0 15%, transparent 17%),
+    linear-gradient(180deg, #f6f9fc 0%, #e3ebf2 100%);
+}
+
+.theme-photo {
+  background:
+    linear-gradient(180deg, #20a9de 0%, #167bb2 100%),
+    radial-gradient(circle at 15% 18%, rgba(255, 255, 255, 0.3) 0%, transparent 55%);
+}
+
+.theme-forecast {
+  background: linear-gradient(180deg, #0059c9 0%, #184da7 100%);
+}
+
+.theme-news {
+  background: linear-gradient(180deg, #058f36 0%, #0a6f2f 100%);
+}
+
+.theme-shop {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.42) 0 16px,
+      rgba(201, 243, 252, 0.2) 16px 32px
+    ),
+    linear-gradient(180deg, #68d8f8 0%, #34acdc 100%);
+}
+
+.theme-internet {
+  background:
+    radial-gradient(circle at 33% 36%, rgba(255, 255, 255, 0.35) 0 22%, transparent 24%),
+    linear-gradient(180deg, #5bc4ee 0%, #0f96ce 100%);
+}
+
+.theme-vc {
+  background:
+    linear-gradient(180deg, #b99767 0%, #8a6844 100%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 8px);
+}
+
+.theme-download-a {
+  background: linear-gradient(180deg, #fdfefe 0%, #dbe8f2 100%);
+}
+
+.theme-download-b {
+  background: linear-gradient(180deg, #f9fdff 0%, #d0ecf8 100%);
+}
+
+.theme-download-c {
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.72) 0 10px, rgba(215, 231, 241, 0.84) 10px 20px),
+    linear-gradient(180deg, #ffffff 0%, #d4e2ee 100%);
+}
+
+.theme-photo .tile-name,
+.theme-forecast .tile-name,
+.theme-news .tile-name,
+.theme-shop .tile-name,
+.theme-internet .tile-name,
+.theme-vc .tile-name {
+  color: #f4f9ff;
+}
+
+.theme-photo .tile-sub,
+.theme-forecast .tile-sub,
+.theme-news .tile-sub,
+.theme-shop .tile-sub,
+.theme-internet .tile-sub,
+.theme-vc .tile-sub {
+  color: rgba(238, 248, 255, 0.9);
+}
+
+.nav-arrow {
+  border: 1px solid #9ec5dd;
+  background: linear-gradient(180deg, #f8feff 0%, #dff0f9 100%);
+  border-radius: 999px;
+  width: 20px;
+  height: 56px;
+  color: #59acd1;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(93, 125, 151, 0.18);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.nav-arrow span {
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.nav-arrow:hover {
+  transform: scale(1.04);
+}
+
+.nav-arrow:disabled {
+  opacity: 0.22;
+  cursor: default;
+}
+
+.system-bar {
+  position: relative;
+  background: linear-gradient(180deg, #dce6ef 0%, #ccd8e3 100%);
+  border-top: 1px solid #bccad8;
+}
+
+.wave-cut {
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -34px;
+  height: 58px;
+  background: #edf3f8;
+  border-top: 2px solid #b7cad8;
+  border-left: 2px solid #b7cad8;
+  border-right: 2px solid #b7cad8;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+.system-inner {
+  position: relative;
+  z-index: 1;
+  min-height: 130px;
+  padding: 1.25rem 1rem 0.55rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.system-left,
+.system-right {
+  display: inline-flex;
+  gap: 0.52rem;
+}
+
+.sys-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 2px solid #abd0e4;
+  background: radial-gradient(circle at 32% 22%, #ffffff 0%, #b8dff1 92%);
+  color: #5390ad;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 3px 9px rgba(84, 111, 136, 0.28);
+}
+
+.sys-btn.small {
+  width: 42px;
+  height: 42px;
+  font-size: 0.78rem;
+  align-self: end;
+}
+
+.center-readout {
+  justify-self: center;
+  text-align: center;
+}
+
+.page-dots {
+  display: inline-flex;
+  gap: 0.34rem;
+  align-items: center;
+  padding: 0.2rem 0.62rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #bfd8e8;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: #9ec2d7;
+  cursor: pointer;
+}
+
+.dot.active {
+  width: 16px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #5abfe4 0%, #96def8 100%);
+}
+
+.menu-name {
+  margin: 0.43rem 0 0;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  color: #3ca9d3;
+  font-size: clamp(1rem, 2.5vw, 1.34rem);
+}
+
+.date-label {
+  margin: 0.22rem 0 0;
+  color: var(--text-main);
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-size: clamp(0.92rem, 2.4vw, 1.34rem);
+}
+
+@media (max-width: 840px) {
+  .wii-console {
+    height: min(660px, 95vh);
+    grid-template-rows: 1fr 120px;
+  }
+
+  .menu-stage {
+    grid-template-columns: 24px 1fr 24px;
+  }
+
+  .channel-grid {
+    gap: 0.45rem;
+    min-height: min(470px, 66vh);
+  }
+
+  .sys-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 0.82rem;
+  }
+
+  .sys-btn.small {
+    width: 38px;
+    height: 38px;
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 620px) {
+  body {
+    padding: 0.55rem;
+  }
+
+  .wii-console {
+    border-radius: 12px;
+    height: min(640px, 96vh);
+  }
+
+  .channel-grid {
+    gap: 0.35rem;
+  }
+
+  .channel-tile {
+    border-radius: 9px;
+    padding: 0.2rem;
+  }
+
+  .tile-sub {
+    display: none;
+  }
+
+  .system-inner {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
+
+  .system-left .sys-btn.small {
+    display: none;
+  }
+}
