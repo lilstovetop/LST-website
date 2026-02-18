@@ -80,6 +80,10 @@ button {
 }
 
 .channel-tile {
+  text-decoration: none;
+  color: inherit;
+  appearance: none;
+  -webkit-appearance: none;
   border: 1px solid var(--tile-line);
   border-radius: 11px;
   background: linear-gradient(180deg, #fbfcfe 0%, #e7edf4 100%);
@@ -421,4 +425,9 @@ button {
   .system-left .sys-btn.small {
     display: none;
   }
+}
+
+.channel-tile:focus-visible {
+  outline: 2px solid #78c5e6;
+  outline-offset: 2px;
 }

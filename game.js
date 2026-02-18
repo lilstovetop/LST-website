@@ -14,7 +14,12 @@ const menuViewport = document.getElementById("menuViewport");
 const pageTemplate = document.getElementById("pageTemplate");
 
 const initialChannels = [
-  { title: "Disc Channel", subtitle: "Nintendo", theme: "theme-disc" },
+  {
+    title: "Twitter",
+    subtitle: "twitter.com",
+    theme: "theme-internet",
+    url: "https://x.com/lilstovetop",
+  },
   { title: "Mii Channel", subtitle: "Nintendo", theme: "theme-mii" },
   { title: "Photo Channel", subtitle: "Nintendo", theme: "theme-photo" },
   { title: "Forecast Channel", subtitle: "Wii", theme: "theme-forecast" },
@@ -35,6 +40,12 @@ const channels = Array.from({ length: TOTAL_SLOTS }, (_, index) => {
   return null;
 });
 
+function animateTileLaunch(tile) {
+  tile.classList.remove("launching");
+  void tile.offsetWidth;
+  tile.classList.add("launching");
+}
+
 function renderPages() {
   pagesTrack.innerHTML = "";
 
@@ -46,8 +57,16 @@ function renderPages() {
     for (let slot = 0; slot < SLOTS_PER_PAGE; slot += 1) {
       const channelIndex = pageIndex * SLOTS_PER_PAGE + slot;
       const channel = channels[channelIndex];
-      const tile = document.createElement("button");
-      tile.type = "button";
+      const tile = document.createElement(channel?.url ? "a" : "button");
+
+      if (channel?.url) {
+        tile.href = channel.url;
+        tile.target = "_blank";
+        tile.rel = "noopener noreferrer";
+      } else {
+        tile.type = "button";
+      }
+
       tile.className = channel
         ? `channel-tile filled ${channel.theme}`
         : "channel-tile empty";
@@ -73,9 +92,7 @@ function renderPages() {
 
       if (channel) {
         tile.addEventListener("click", () => {
-          tile.classList.remove("launching");
-          void tile.offsetWidth;
-          tile.classList.add("launching");
+          animateTileLaunch(tile);
         });
       }
 
